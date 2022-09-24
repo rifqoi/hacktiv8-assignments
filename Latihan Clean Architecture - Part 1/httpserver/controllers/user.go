@@ -56,13 +56,6 @@ func GetUserByID(ctx *gin.Context) {
 		return
 	}
 
-	if id > len(services.Users) {
-		ctx.AbortWithStatusJSON(http.StatusNotFound, gin.H{
-			"error": fmt.Sprintf("no users with id %d", id),
-		})
-		return
-	}
-
 	fmt.Println("id", id)
 	response := services.GetUserByID(id - 1) // id - 1 to get index of slice
 	WriteJsonResponse(ctx, response)
