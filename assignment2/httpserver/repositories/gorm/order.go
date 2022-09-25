@@ -35,11 +35,13 @@ func (o *orderRepo) CreateOrder(order *models.Order) error {
 }
 
 func (o *orderRepo) UpdateOrder(order *models.Order) error {
-	err := o.db.Debug().Model(&order).Association("Items").Replace(order.Items)
-	if err != nil {
-		return err
+	if len(order.Items) > 0 {
+		err := o.db.Debug().Model(&order).Association("Items").Replace(order.Items)
+		if err != nil {
+			return err
+		}
 	}
-	err = o.db.Debug().Session(&gorm.Session{FullSaveAssociations: true}).Preload("Items").Save(&order).Error
+	err := o.db.Debug().Updates(&order).Error
 	return err
 }
 
