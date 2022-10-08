@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="./styles.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	</head>
+	<body>
+		<div class="center">
+			<div class="circle">
+				<div class="wave"></div>
+			</div>
+		</div>
+		<div class="compass">
+			<div class="direction">
+				<p id="direction-text">
+					<span id="direction-speed"></span>
+				</p>
+			</div>
+			<div id="arrow" class="arrow n"></div>
+		</div>
+		<div class="text-container">
+			<h3 id="wind-status"></h3>
+			<h3 id="water-status"></h3>
+			<h3 id="status">SIAGA</h3>
+		</div>
+	</body>
+	<script>
+		function connectWS() {
+			var websocket = new WebSocket("ws://localhost:8080/websocket")
+			websocket.onopen = function (e) {
+				console.log("Connection open...")
+			}
+			websocket.onmessage = function (e) {
+				e.preventDefault()
+
+				let payload = JSON.parse(e.data)
+				let wind = payload.wind
+				let water = payload.water
+				let windDirection
+				let status
+				let wave = document.getElementsByClassName("wave")[0]
+				let currentTopWave = getComputedStyle(wave).getPropertyValue("top")
+				let windStatus = document.getElementById("wind-status")
+				let waterStatus = document.getElementById("water-status")
+				windStatus.innerText = "WIND: " + wind + " m/s"
+				waterStatus.innerText = "WATER: " + water + " m"
+
+				let statusEle = document.getElementById("status")
+
+				let arrow = document.getElementById("arrow")
+				arrow.className = "arrow"
+				// Set top to water level
+				document.documentElement.style.setProperty(
+					"--top",
+					(100 - water).toString() + "%"
+				)
+
+				if (water <= 50) {
+					console.log("water", water)
+					console.log("top:", currentTopWave)
+					status = "AMAN"
+				} else if (water <= 80 && water >= 60) {
+					console.log("water", water)
+					console.log("top:", currentTopWave)
+					status = "SIAGA"
+				} else if (water > 80) {
+					console.log("water", water)
+					console.log("top:", currentTopWave)
+					status = "BAHAYA"
+				}
+
+				if (wind <= 25) {
+					console.log("wind", wind)
+					status = "AMAN"
+					windDirection = "N"
+					arrow.classList.add("n")
+				} else if (wind > 25 && wind <= 50) {
+					console.log("wind", wind)
+					status = "AMAN"
+					windDirection = "W"
+					arrow.classList.add("w")
+				} else if (wind > 50 && wind <= 75) {
+					console.log("wind", wind)
+					status = "SIAGA"
+					windDirection = "S"
+					arrow.classList.add("s")
+				} else if (wind > 75) {
+					console.log("wind", wind)
+					status = "BAHAYA"
+					windDirection = "E"
+					arrow.classList.add("e")
+				}
+				let directionText = document.getElementById("direction-text")
+				directionText.firstChild.data = windDirection
+
+				let directionSpeed = document.getElementById("direction-speed")
+				directionSpeed.innerHTML = wind + " m/s"
+				statusEle.innerHTML = status
+
+				switch (status) {
+					case "AMAN":
+						statusEle.style.color = "#4CCB17"
+						break
+					case "SIAGA":
+						statusEle.style.color = "#FF7800"
+						break
+					case "BAHAYA":
+						statusEle.style.color = "#E60000"
+						break
+				}
+			}
+			websocket.onclose = function (e) {
+				console.log("Connection Closed..")
+			}
+		}
+		connectWS()
+	</script>
+</html>

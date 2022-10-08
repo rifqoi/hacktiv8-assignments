@@ -1,0 +1,261 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:200,400,500,600);
+:root {
+	--top: 50%;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	width: 100%;
+	height: 100vh;
+	background-color: #262626;
+}
+.container {
+	/* display: flex; */
+	/* align-items: center; */
+	/* justify-content: center; */
+}
+.center {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 50%;
+	left: 45%;
+	transform: translate(-50%, -50%);
+}
+.circle {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	cursor: pointer;
+}
+.wave {
+	background-color: #3f68c5;
+	position: absolute;
+	top: 110%;
+	height: 200%;
+	width: 200%;
+	border-radius: 38%;
+	left: -50%;
+	transform: rotate(360deg);
+	transition: all 5s ease-in-out;
+	animation: wave 18s linear infinite normal;
+}
+@keyframes wave {
+	from {
+		transform: rotate(0deg);
+		top: var(--top);
+	}
+	to {
+		transform: rotate(2000deg);
+		top: var(--top);
+	}
+}
+
+.ag-format-container {
+	width: 1142px;
+	margin: 0 auto;
+}
+
+.ag-leaf-block {
+	overflow: hidden;
+
+	position: relative;
+}
+
+#js-ag-leaf_box {
+	height: 100vh;
+	width: 100vw;
+}
+.js-ag-leaf {
+	height: 25px;
+	width: 31px;
+	background: url(https://raw.githubusercontent.com/SochavaAG/example-mycode/master/pens/animation-leaf/images/leaf.png);
+
+	position: absolute;
+}
+
+@media only screen and (max-width: 767px) {
+	.ag-format-container {
+		width: 96%;
+	}
+}
+
+@media only screen and (max-width: 639px) {
+}
+
+@media only screen and (max-width: 479px) {
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.ag-format-container {
+		width: 750px;
+	}
+}
+
+@media (min-width: 980px) and (max-width: 1161px) {
+	.ag-format-container {
+		width: 960px;
+	}
+}
+
+.compass {
+	display: block;
+	width: 90px;
+	height: 90px;
+	border-radius: 100%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
+	font-family: "Dosis";
+	color: #555;
+	text-shadow: 1px 1px 1px white;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+}
+.compass:before {
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	content: "N";
+	font-size: 14px;
+	top: -2px;
+}
+.compass .direction {
+	height: 100%;
+	width: 100%;
+	display: block;
+	background: #f2f6f5;
+	background: -moz-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0%, #f2f6f5),
+		color-stop(100%, #cbd5d6)
+	);
+	background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+	background: -o-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+	border-radius: 100%;
+}
+.compass .direction p {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 80px;
+	display: block;
+	margin-top: -45px;
+	font-size: 28px;
+	font-weight: bold;
+}
+.compass .direction p span {
+	display: block;
+	line-height: normal;
+	margin-top: -24px;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.compass .arrow {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	top: 0;
+}
+.compass .arrow:after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid red;
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	margin-left: -5px;
+	z-index: 99;
+}
+.compass .arrow.nne {
+	transform: rotate(22.5deg);
+}
+.compass .arrow.ne {
+	transform: rotate(45deg);
+}
+.compass .arrow.ene {
+	transform: rotate(67.5deg);
+}
+.compass .arrow.e {
+	transform: rotate(90deg);
+}
+.compass .arrow.ese {
+	transform: rotate(112.5deg);
+}
+.compass .arrow.se {
+	transform: rotate(135deg);
+}
+.compass .arrow.sse {
+	transform: rotate(157.5deg);
+}
+.compass .arrow.s {
+	transform: rotate(180deg);
+}
+.compass .arrow.ssw {
+	transform: rotate(202.5deg);
+}
+.compass .arrow.sw {
+	transform: rotate(-135deg);
+}
+.compass .arrow.wsw {
+	transform: rotate(-114.5deg);
+}
+.compass .arrow.w {
+	transform: rotate(-90deg);
+}
+.compass .arrow.wnw {
+	transform: rotate(-69.5deg);
+}
+.compass .arrow.nw {
+	transform: rotate(-45deg);
+}
+.compass .arrow.nnw {
+	transform: rotate(-24.5deg);
+}
+
+.text-container {
+	font-family: "Dosis";
+	color: #fff;
+	font-size: 30px;
+	position: absolute;
+	top: 60%;
+	left: 43%;
+}
+
+.text-container #wind-status {
+	color: #59d96c;
+}
+
+.text-container #water-status {
+	color: #128bc7;
+}
+
+.text-container #status {
+	color: red;
+	position: absolute;
+	left: 20%;
+}
