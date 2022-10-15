@@ -4,7 +4,7 @@
 - [Positive Case](https://github.com/rifqoi/hacktiv8-assignments/blob/main/Latihan%202%20-%20Unit%20Testing/controller/product_controller/product_controller_test.go#L186)
 - [Negative Case](https://github.com/rifqoi/hacktiv8-assignments/blob/main/Latihan%202%20-%20Unit%20Testing/controller/product_controller/product_controller_test.go#L241)
 
-## Menambah test untuk function GetProducts pada controller layer
+## Menambah test untuk function GetProducts pada service layer
 - [Positive Case](https://github.com/rifqoi/hacktiv8-assignments/blob/main/Latihan%202%20-%20Unit%20Testing/service/product_service/product_service_test.go#L113)
 - [Negative Case](https://github.com/rifqoi/hacktiv8-assignments/blob/main/Latihan%202%20-%20Unit%20Testing/service/product_service/product_service_test.go#L150)
 
